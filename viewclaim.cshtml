@@ -1,0 +1,19 @@
+@model IEnumerable<ClaimAssignment.Models.sp_viewclaim_1_Result>
+@{
+    ViewBag.Title = "viewclaim";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    WebGrid grid = new WebGrid(Model); 
+}
+
+<h2>View Claim</h2>
+@grid.GetHtml(
+    tableStyle:"table table bordered table hover",
+    columns: new[]
+    {grid.Column("claimid","Claim Id"), grid.Column("claimdesc","Claim Description"),
+        grid.Column("claimtype","Claim Type"),grid.Column("claimstatus","Claim Status"),
+        grid.Column("mobno","Mobile No"),grid.Column("empid","Employee Id"),
+        grid.Column(format:@<text>@Html.ActionLink("Approve","approve",new { id=item.claimid})</text>)
+    }
+    )
+
+
