@@ -1,0 +1,50 @@
+use db01test01
+create table tblclaim1349205
+(
+claimid int identity(1000,1) primary key,
+claimdesc varchar(80),
+claimtype varchar(30),
+claimstatus varchar(30) default 'Active' ,
+mobno bigint,
+empid int
+
+);
+
+
+create proc sp_tblclaim_2
+@cid int out,
+@cdesc varchar(80),
+@ctype varchar(30),
+@cstatus varchar(30) ,
+@m bigint,
+@e int
+as
+begin
+insert into tblclaim1349205 (claimdesc ,claimtype,mobno,empid) values (@cdesc, @ctype,@m,@e);
+set @cid = @@IDENTITY 
+end
+
+select * from tblclaim1349205
+truncate table tblclaim1349205
+
+create proc sp_claimstatus_1
+@id int
+as
+begin
+select claimstatus from tblclaim1349205 where claimid=@id
+end
+
+create proc sp_viewclaim_1
+as
+begin
+select * from tblclaim1349205
+end
+
+create proc sp_approve_1
+@id int
+as
+begin
+update tblclaim1349205 
+set claimstatus='Approved' where claimid=@id
+end
+
