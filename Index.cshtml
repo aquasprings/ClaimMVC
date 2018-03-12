@@ -1,0 +1,56 @@
+@model ClaimAssignment.Models.Class1
+@{
+    ViewBag.Title = "Index";
+}
+
+@{
+    List<SelectListItem> listclaimtype = new List<SelectListItem>();
+    listclaimtype.Add(new SelectListItem { Text = "Domiciliary", Value = "Domiciliary" });
+    listclaimtype.Add(new SelectListItem { Text = "Hospitalization", Value = "Hospitalization" });
+}
+
+<h2>Raise a Claim</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <table>
+
+        <tr>
+            <td>@Html.LabelFor(model => model.claimdesc)</td>
+            <td>@Html.EditorFor(model => model.claimdesc)</td>
+            <td>@Html.ValidationMessageFor(model => model.claimdesc)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.LabelFor(model => model.claimtype)</td>
+            <td>@Html.DropDownListFor(model => model.claimtype, listclaimtype, "--Select Claim Type--")</td>
+            <td>@Html.ValidationMessageFor(model => model.claimtype)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.mobno)</td>
+            <td>@Html.EditorFor(model => model.mobno)</td>
+            <td>@Html.ValidationMessageFor(model => model.mobno)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.empid)</td>
+            <td>@Html.EditorFor(model => model.empid)</td>
+            <td>@Html.ValidationMessageFor(model => model.empid)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.claimstatus)</td>
+            <td>@ViewBag.Status</td>
+
+        </tr>
+
+        <tr>
+            <td><input type="submit" value="Submit" /></td>
+        </tr>
+
+
+    </table>
+
+
+}
+
+
